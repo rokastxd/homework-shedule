@@ -10,6 +10,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 import { users } from "./schema/users";
+import { createTable } from "./createTable";
 
 export * from "./schema/users";
 export * from "./schema/groups";
@@ -22,7 +23,6 @@ export * from "./schema/disciplines";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `homework-shedule_${name}`);
 
 export const posts = createTable(
   "post",
