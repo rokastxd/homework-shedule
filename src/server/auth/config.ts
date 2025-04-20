@@ -1,14 +1,12 @@
+import Credentials from "next-auth/providers/credentials";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { type DefaultSession, type NextAuthConfig } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
-
+import { parse, validate } from "@telegram-apps/init-data-node";
+import { env } from "~/env";
 import { db } from "~/server/db";
-import {
-  accounts,
-  sessions,
-  users,
-  verificationTokens,
-} from "~/server/db/schema";
+import { accounts, users } from "~/server/db/schema";
+import { eq } from "drizzle-orm";
+import { z } from "zod";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -38,7 +36,46 @@ declare module "next-auth" {
  */
 export const authConfig = {
   providers: [
-    DiscordProvider,
+    Credentials({
+      credentials: {},
+      authorize: async (credentials) => {
+        const parsedCredentials = z
+          .object({
+            initDataRaw: z.string().min(1),
+            csrfToken: z.string().min(1),
+            callbackUrl: z.string().min(1),
+          })
+          .safeParse(credentials);
+
+        if (!parsedCredentials.success) {
+          throw new Error("Invalid credentials");
+        }
+        const { initDataRaw } = parsedCredentials.data;
+
+        let rawId: number | undefined;
+
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+          validate(initDataRaw, env.BOT_TOKEN);
+
+          rawId = parse(initDataRaw).user?.id;
+        } catch (e) {
+          throw new Error("Error validating user init data", { cause: e });
+        }
+
+        if (!rawId) throw new Error("Cannot parse user id");
+
+        const id = rawId.toString();
+
+        const user = await db.query.users.findFirst({
+          where: eq(users.id, id),
+        });
+
+        if (!user) await db.insert(users).values({ id });
+
+        return { id };
+      },
+    }),
     /**
      * ...add more providers here.
      *
@@ -52,8 +89,6 @@ export const authConfig = {
   adapter: DrizzleAdapter(db, {
     usersTable: users,
     accountsTable: accounts,
-    sessionsTable: sessions,
-    verificationTokensTable: verificationTokens,
   }),
   callbacks: {
     session: ({ session, user }) => ({
