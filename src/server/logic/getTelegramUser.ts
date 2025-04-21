@@ -20,7 +20,7 @@ const telegramUserResponseSchema = z.object({
 async function getTelegramUser(userId: string) {
     try {
         const getChatResponse = await fetch(
-            `https://api.telegram.org/bot${process.env.BOT_TOKEN}/getChatMember?chat_id=${userId}&user_id=${userId}`
+            `https://api.telegram.org/bot${process.env.BOT_SECRET_TOKEN}/getChatMember?chat_id=${userId}&user_id=${userId}`
         )
 
         const data: unknown = await getChatResponse.json()
