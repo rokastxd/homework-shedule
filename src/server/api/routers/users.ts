@@ -20,7 +20,7 @@ export const usersRouter = createTRPCRouter({
 
     getUser: protectedProcedure.query(async ({ ctx }) => {
         const user = await ctx.db.query.users.findFirst({
-            where: eq(users.id, ctx.session.user.id),
+            where: eq(users.id, ctx.session.user.id ?? ''),
             columns: { id: true, groupId: true }
         })
 
