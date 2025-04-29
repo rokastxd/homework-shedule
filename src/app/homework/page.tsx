@@ -2,22 +2,13 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { use, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { api } from '~/trpc/react'
 
-export default function Home() {
-    const router = useRouter()
-    const user = api.users.getUser.useQuery()
-
-    useEffect(() => {
-        if (user.status === 'success' && user.data?.groupId) {
-            router.push('/homework')
-        }
-    }, [user.data, router])
-
+export default function Login() {
     const [groupCreate, showGroupCreate] = useState(false)
     const [inputValue, setInputValue] = useState('')
-    
+    const router = useRouter()
 
     const utils = api.useUtils()
     const addGroup = api.groups.addGroup.useMutation({
@@ -28,10 +19,9 @@ export default function Home() {
 
     return (
         <main>
-            { user.status === 'success' && !user.data.groupId &&
             <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
                 <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-[5rem]">
-                    Вы не состоите в группе
+                    Вы состоите в группе
                 </h1>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
                     {!groupCreate ? (
@@ -52,6 +42,8 @@ export default function Home() {
                                 value={inputValue}
                                 onChange={e => {
                                     setInputValue(e.target.value)
+                                    console.log(inputValue);
+                                    
                                 }}
                             ></input>
                             <button
@@ -69,7 +61,7 @@ export default function Home() {
                         </div>
                     )}
                 </div>
-            </div>}
+            </div>
         </main>
     )
 }
