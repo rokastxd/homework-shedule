@@ -1,14 +1,15 @@
-import { varchar, date } from 'drizzle-orm/pg-core'
+import { varchar, date, timestamp } from 'drizzle-orm/pg-core'
 import { createTable } from '../createTable'
 import { groups } from './groups'
 import { relations } from 'drizzle-orm'
 
 export const homework = createTable('homework', {
-    discipline: varchar('discipline').primaryKey(),
+    id: varchar('id', { length: 255 }).primaryKey().notNull(),
+    discipline: varchar('discipline').notNull(),
     groupId: varchar('group_id').notNull(),
     body: varchar('body').notNull(),
-    deadline: date('deadline').notNull(),
-    createdAt: date('created_at').notNull()
+    createdAt: timestamp('created_at').notNull(),
+    deadline: timestamp('deadline').notNull()
 })
 
 export const homeworkRelations = relations(homework, ({ one }) => ({

@@ -58,7 +58,8 @@ export const usersRouter = createTRPCRouter({
             const groupUsersWithName = await Promise.all(
                 groupUsers.map(async g => {
                     const tgUser = await getTelegramUser(g.id)
-                    const role = group?.elderId === g.id ? 'Староста' : 'Участник'
+                    const role =
+                        group?.elderId === g.id ? 'Староста' : 'Участник'
                     return {
                         ...g,
                         name: tgUser?.first_name ?? tgUser?.username,

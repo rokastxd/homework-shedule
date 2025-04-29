@@ -1,4 +1,3 @@
-import { TRPCError } from '@trpc/server'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { createId } from '@paralleldrive/cuid2'
@@ -11,7 +10,7 @@ export const groupsRouter = createTRPCRouter({
         .input(z.object({ group_name: z.string().min(1) }))
         .mutation(async ({ ctx, input }) => {
             const groupId = createId()
-            
+
             await ctx.db.insert(groups).values({
                 id: groupId,
                 nameGroup: input.group_name,

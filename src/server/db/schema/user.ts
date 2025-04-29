@@ -3,8 +3,8 @@ import { groups } from '../schema'
 import { relations } from 'drizzle-orm'
 import { createTable } from '../createTable'
 
-export const userTable = createTable("user", {
-    id: doublePrecision("id").primaryKey().notNull(),
+export const userTable = createTable('user', {
+    id: doublePrecision('id').primaryKey().notNull(),
     groupId: varchar('group_id', { length: 255 })
 })
 

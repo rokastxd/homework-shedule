@@ -1,18 +1,23 @@
-import { eq } from "drizzle-orm"
-import { env } from "~/env"
-import { z } from "zod"
-import { db } from "~/server/db"
+import { eq } from 'drizzle-orm'
+import { env } from '~/env'
+import { z } from 'zod'
+import { db } from '~/server/db'
 import { parse, validate } from '@telegram-apps/init-data-node'
-import { userTable } from "~/server/db/schema/user"
-import { createSession, generateSessionToken, getCurrentSession } from "~/server/auth/session"
-import { setSessionTokenCookie } from "~/server/auth/cookies"
+import { userTable } from '~/server/db/schema/user'
+import {
+    createSession,
+    generateSessionToken,
+    getCurrentSession
+} from '~/server/auth/session'
+import { setSessionTokenCookie } from '~/server/auth/cookies'
 
 export async function POST(req: Request) {
-    if ((await getCurrentSession()).user) return Response.json({info: "Already logged in"}, {status: 200})
+    if ((await getCurrentSession()).user)
+        return Response.json({ info: 'Already logged in' }, { status: 200 })
 
     const parsedCredentials = z
         .object({
-            initDataRaw: z.string().min(1),
+            initDataRaw: z.string().min(1)
         })
         .safeParse(await req.json())
 
@@ -29,10 +34,14 @@ export async function POST(req: Request) {
 
         id = parse(initDataRaw).user?.id
     } catch (e) {
-        return Response.json({ error: 'Error validating user init data' }, { status: 400 })
+        return Response.json(
+            { error: 'Error validating user init data' },
+            { status: 400 }
+        )
     }
 
-    if (!id) return Response.json({ error: 'Cannot parse user id' }, { status: 400 })
+    if (!id)
+        return Response.json({ error: 'Cannot parse user id' }, { status: 400 })
 
     const user = await db.query.userTable.findFirst({
         where: eq(userTable.id, id)
@@ -44,7 +53,7 @@ export async function POST(req: Request) {
 
     const token = generateSessionToken()
     const session = await createSession(token, id)
-    setSessionTokenCookie(token, session.expiresAt)
+    void setSessionTokenCookie(token, session.expiresAt)
 
     return Response.json({ id }, { status: 200 })
 }
