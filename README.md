@@ -1,29 +1,142 @@
-# Create T3 App
+#   Дневник студента
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Телеграм-бот с веб-интерфейсом, позволяющий студентам вести учебный дневник: объединятся в учебные группы, управлять ими, записывать задания, отслеживать дедлайны, управлять расписанием и получать напоминания прямо в Telegram.
 
-## What's next? How do I make an app with this?
+---
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+##  Технологии
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+### Язык и фреймворки
+- **TypeScript** — строгая типизация
+- **Next.js 15** — серверно-клиентный фреймворк
+- **React 18** — пользовательский интерфейс
+- **tRPC** — typesafe API без необходимости писать REST/GraphQL
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### База данных
+- **PostgreSQL** — хранение данных
+- **Drizzle ORM** — типизированная работа с SQL
+- **drizzle-kit** — генерация и миграции схем
 
-## Learn More
+### Аутентификация
+- **crypto** и **encoding** - криптографические библиотеки для авторизации
+- **@auth/drizzle-adapter** — хранение сессий в PostgreSQL через Drizzle
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Telegram WebApp
+- **@telegram-apps/sdk-react** — UI- и hook-интеграция Telegram внутри React
+- **@telegram-apps/init-data-node** — безопасная работа с `initData` на сервере
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Работа с данными
+- **@tanstack/react-query** — кеш и управление запросами
+- **superjson** — сериализация данных между клиентом и сервером
+- **zod** — схемы и валидация данных
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### UI и стили
+- **Tailwind CSS** — утилитарные стили
+- **Geist UI** — готовые компоненты
+- **PostCSS** + **prettier-plugin-tailwindcss** — автоформатирование
 
-## How do I deploy this?
+### Качество кода
+- **ESLint** и **Prettier** — проверка и автоформатирование
+- **eslint-plugin-drizzle** — linting для ORM
+- **typescript-eslint** — поддержка типизированного кода
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+##  Возможности
+
+-   Создание учебных групп
+-   Настройка ролей в учебной группе
+-   Добавление предметов и просмотр расписания
+-   Запись домашних заданий
+-   Уведомления о дедлайнах через Telegram
+-   Авторизация по Telegram ID
+
+##  Структура проекта
+
+homework-shedule/
+│
+├── .vscode/                  # Конфигурации редактора VS Code
+├── drizzle/
+│   └── meta/                 # Служебные данные Drizzle ORM
+├── public/                   # Статические файлы (иконки, картинки, robots.txt)
+├── src/                      # Исходный код приложения
+│
+├── .dockerignore             # Исключения для Docker-контекста
+├── .env.example              # Пример переменных окружения
+├── .eslintrc.cjs             # Конфигурация ESLint
+├── .gitignore                # Исключения для Git
+│
+├── Dockerfile                # Docker-образ для деплоя
+├── README.md                 # Документация проекта
+│
+├── drizzle.config.ts         # Конфигурация для Drizzle ORM
+├── next.config.js            # Конфигурация Next.js
+│
+├── package.json              # Список зависимостей и npm-скриптов
+├── pnpm-lock.yaml            # Лок-файл менеджера пакетов pnpm
+│
+├── postcss.config.js         # Конфигурация PostCSS
+├── prettier.config.js        # Конфигурация Prettier
+│
+├── start-database.sh         # Скрипт инициализации базы данных (локально)
+├── tailwind.config.ts        # Конфигурация Tailwind CSS
+├── tsconfig.json             # Конфигурация TypeScript
+
+## 📦 Установка
+
+1.  Клонирование репозитория:
+
+```bash
+git clone https://github.com/your-username/homework-shedule.git
+cd homework-shedule
+```
+2.  Создание файла .env на основе .env.example и заполнение его:
+
+```bash
+DATABASE_URL=postgres://user:password@localhost:5432/homework_db
+TELEGRAM_BOT_TOKEN=...
+NEXTAUTH_SECRET=...
+NEXTAUTH_URL=https://domain
+```
+
+3.  Установка зависимостей:
+```shell
+pnpm install
+```
+4.  Запуск с Docker
+```bash
+docker-compose up --build
+```
+
+##  Локальная разработка
+```shell
+pnpm dev
+```
+
+##  Работа с базой данных
+
+```bash
+pnpm db:generate    # генерация миграций из схемы
+pnpm db:push        # push схемы в БД
+pnpm db:migrate     # выполнение миграций
+pnpm db:studio      # визуальный интерфейс
+```
+
+##  Проверки и качество кода
+
+```bash
+pnpm lint           # проверка eslint
+pnpm lint:fix       # автофиксы
+pnpm format:check   # проверка форматирования
+pnpm format:write   # автоформатирование
+pnpm typecheck      # проверка типов
+```
+
+##  Авторы
+
+Имя: Данил Пустовалов
+GitHub: [@yourusername](https://github.com/rokastxd https://github.com/DanilPustovalov)
+
+Имя: Тимур Валитов
+GitHub: [@yourusername](https://github.com/DanilPustovalov)
+
+Имя: Руслан Бормотов
+GitHub: [@yourusername](вставь свое Русланчик бля)
