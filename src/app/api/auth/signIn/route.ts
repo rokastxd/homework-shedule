@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         validate(initDataRaw, env.BOT_TOKEN)
 
         id = parse(initDataRaw).user?.id
-    } catch (e) {
+    } catch {
         return Response.json(
             { error: 'Error validating user init data' },
             { status: 400 }

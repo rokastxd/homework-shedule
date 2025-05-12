@@ -17,7 +17,8 @@
         "lint:fix": "next lint --fix",
         "preview": "next build && next start",
         "start": "next start",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "docs": "typedoc"
     },
     "dependencies": {
         "@auth/drizzle-adapter": "^1.7.2",
@@ -42,6 +43,7 @@
         "react-dom": "^18.3.1",
         "server-only": "^0.0.1",
         "superjson": "^2.2.1",
+        "typedoc": "^0.28.4",
         "zod": "^3.23.3"
     },
     "devDependencies": {

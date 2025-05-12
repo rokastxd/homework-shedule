@@ -23,5 +23,17 @@ export const groupsRouter = createTRPCRouter({
                     groupId: groupId
                 })
                 .where(eq(userTable.id, ctx.session.user.id))
+        }),
+    getGroup: protectedProcedure.query(async ({ ctx }) => {
+        if (!ctx.session?.user.groupId) {
+            throw new Error('Not authorized')
+        }
+
+        const group = await ctx.db.query.groups.findFirst({
+            where: eq(groups.id, ctx.session.user.groupId),
+            columns: { nameGroup: true }
         })
+
+        return group?.nameGroup
+    })
 })

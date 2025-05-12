@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { createId } from '@paralleldrive/cuid2'
 
 import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc'
-import { groups, homework, userTable } from '~/server/db/schema'
+import { groups, homework } from '~/server/db/schema'
 import { TRPCError } from '@trpc/server'
 
 export const homeworkRouter = createTRPCRouter({
