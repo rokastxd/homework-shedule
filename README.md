@@ -139,4 +139,4 @@ GitHub: [@yourusername](https://github.com/rokastxd https://github.com/DanilPust
 GitHub: [@yourusername](https://github.com/DanilPustovalov)
 
 Имя: Руслан Бормотов
-GitHub: [@yourusername](вставь свое Русланчик бля)
+GitHub: [@yourusername]()
