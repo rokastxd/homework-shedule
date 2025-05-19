@@ -1,0 +1,118 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>homework-shedule - v0.1.0</title><meta name="description" content="Documentation for homework-shedule"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">homework-shedule - v0.1.0</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>homework-shedule - v0.1.0</h1></div><div class="tsd-panel tsd-typography"><h1 id="дневник-студента" class="tsd-anchor-link">Дневник студента<a href="#дневник-студента" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p>Телеграм-бот с веб-интерфейсом, позволяющий студентам вести учебный дневник: объединятся в учебные группы, управлять ими, записывать задания, отслеживать дедлайны, управлять расписанием и получать напоминания прямо в Telegram.</p>
+<hr>
+<h2 id="технологии" class="tsd-anchor-link">Технологии<a href="#технологии" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><h3 id="язык-и-фреймворки" class="tsd-anchor-link">Язык и фреймворки<a href="#язык-и-фреймворки" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li><strong>TypeScript</strong> — строгая типизация</li>
+<li><strong>Next.js 15</strong> — серверно-клиентный фреймворк</li>
+<li><strong>React 18</strong> — пользовательский интерфейс</li>
+<li><strong>tRPC</strong> — typesafe API без необходимости писать REST/GraphQL</li>
+</ul>
+<h3 id="база-данных" class="tsd-anchor-link">База данных<a href="#база-данных" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li><strong>PostgreSQL</strong> — хранение данных</li>
+<li><strong>Drizzle ORM</strong> — типизированная работа с SQL</li>
+<li><strong>drizzle-kit</strong> — генерация и миграции схем</li>
+</ul>
+<h3 id="аутентификация" class="tsd-anchor-link">Аутентификация<a href="#аутентификация" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li><strong>crypto</strong> и <strong>encoding</strong> - криптографические библиотеки для авторизации</li>
+<li><strong>@auth/drizzle-adapter</strong> — хранение сессий в PostgreSQL через Drizzle</li>
+</ul>
+<h3 id="telegram-webapp" class="tsd-anchor-link">Telegram WebApp<a href="#telegram-webapp" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li><strong>@telegram-apps/sdk-react</strong> — UI- и hook-интеграция Telegram внутри React</li>
+<li><strong>@telegram-apps/init-data-node</strong> — безопасная работа с <code>initData</code> на сервере</li>
+</ul>
+<h3 id="работа-с-данными" class="tsd-anchor-link">Работа с данными<a href="#работа-с-данными" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li><strong>@tanstack/react-query</strong> — кеш и управление запросами</li>
+<li><strong>superjson</strong> — сериализация данных между клиентом и сервером</li>
+<li><strong>zod</strong> — схемы и валидация данных</li>
+</ul>
+<h3 id="ui-и-стили" class="tsd-anchor-link">UI и стили<a href="#ui-и-стили" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li><strong>Tailwind CSS</strong> — утилитарные стили</li>
+<li><strong>Geist UI</strong> — готовые компоненты</li>
+<li><strong>PostCSS</strong> + <strong>prettier-plugin-tailwindcss</strong> — автоформатирование</li>
+</ul>
+<h3 id="качество-кода" class="tsd-anchor-link">Качество кода<a href="#качество-кода" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><ul>
+<li><strong>ESLint</strong> и <strong>Prettier</strong> — проверка и автоформатирование</li>
+<li><strong>eslint-plugin-drizzle</strong> — linting для ORM</li>
+<li><strong>typescript-eslint</strong> — поддержка типизированного кода</li>
+</ul>
+<h2 id="возможности" class="tsd-anchor-link">Возможности<a href="#возможности" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>Создание учебных групп</li>
+<li>Настройка ролей в учебной группе</li>
+<li>Добавление предметов и просмотр расписания</li>
+<li>Запись домашних заданий</li>
+<li>Уведомления о дедлайнах через Telegram</li>
+<li>Авторизация по Telegram ID</li>
+</ul>
+<h2 id="структура-проекта" class="tsd-anchor-link">Структура проекта<a href="#структура-проекта" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>homework-shedule/
+│
+├── .vscode/                  # Конфигурации редактора VS Code
+├── drizzle/
+│   └── meta/                 # Служебные данные Drizzle ORM
+├── public/                   # Статические файлы (иконки, картинки, robots.txt)
+├── src/                      # Исходный код приложения
+│
+├── .dockerignore             # Исключения для Docker-контекста
+├── .env.example              # Пример переменных окружения
+├── .eslintrc.cjs             # Конфигурация ESLint
+├── .gitignore                # Исключения для Git
+│
+├── Dockerfile                # Docker-образ для деплоя
+├── <a href="http://README.md">README.md</a>                 # Документация проекта
+│
+├── drizzle.config.ts         # Конфигурация для Drizzle ORM
+├── next.config.js            # Конфигурация Next.js
+│
+├── package.json              # Список зависимостей и npm-скриптов
+├── pnpm-lock.yaml            # Лок-файл менеджера пакетов pnpm
+│
+├── postcss.config.js         # Конфигурация PostCSS
+├── prettier.config.js        # Конфигурация Prettier
+│
+├── <a href="http://start-database.sh">start-database.sh</a>         # Скрипт инициализации базы данных (локально)
+├── tailwind.config.ts        # Конфигурация Tailwind CSS
+├── tsconfig.json             # Конфигурация TypeScript</p>
+<h2 id="📦-установка" class="tsd-anchor-link">📦 Установка<a href="#📦-установка" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ol>
+<li>Клонирование репозитория:</li>
+</ol>
+<pre><code class="bash"><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-2">clone</span><span class="hl-1"> </span><span class="hl-2">https://github.com/your-username/homework-shedule.git</span><br/><span class="hl-0">cd</span><span class="hl-1"> </span><span class="hl-2">homework-shedule</span>
+</code><button type="button">Copy</button></pre>
+
+<ol start="2">
+<li>Создание файла .env на основе .env.example и заполнение его:</li>
+</ol>
+<pre><code class="bash"><span class="hl-3">DATABASE_URL</span><span class="hl-1">=</span><span class="hl-2">postgres://user:password@localhost:5432/homework_db</span><br/><span class="hl-3">TELEGRAM_BOT_TOKEN</span><span class="hl-1">=</span><span class="hl-2">...</span><br/><span class="hl-3">NEXTAUTH_SECRET</span><span class="hl-1">=</span><span class="hl-2">...</span><br/><span class="hl-3">NEXTAUTH_URL</span><span class="hl-1">=</span><span class="hl-2">https://domain</span>
+</code><button type="button">Copy</button></pre>
+
+<ol start="3">
+<li>Установка зависимостей:</li>
+</ol>
+<pre><code class="shell"><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">install</span>
+</code><button type="button">Copy</button></pre>
+
+<ol start="4">
+<li>Запуск с Docker</li>
+</ol>
+<pre><code class="bash"><span class="hl-0">docker-compose</span><span class="hl-1"> </span><span class="hl-2">up</span><span class="hl-1"> </span><span class="hl-4">--build</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="локальная-разработка" class="tsd-anchor-link">Локальная разработка<a href="#локальная-разработка" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="shell"><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">dev</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Telegram Web Apps требуют защищённого соединения (HTTPS). Это значит, что ваше приложение должно быть доступно по SSL-сертифицированному адресу (например, <a href="https://example.com">https://example.com</a>), иначе Telegram не загрузит его внутри клиента.</p>
+<p>Если вы разрабатываете локально, используйте ngrok или аналогичный инструмент для проброса вашего localhost в интернет через HTTPS:</p>
+<pre><code class="bash"><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">ngrok</span><span class="hl-1"> </span><span class="hl-2">http</span><span class="hl-1"> </span><span class="hl-5">3000</span>
+</code><button type="button">Copy</button></pre>
+
+<p>После запуска вы получите публичный HTTPS-домен (<a href="https://your-subdomain.ngrok.io">https://your-subdomain.ngrok.io</a>), который можно указать в настройках Telegram-бота как start_parameter или web_app.url.</p>
+<h2 id="работа-с-базой-данных" class="tsd-anchor-link">Работа с базой данных<a href="#работа-с-базой-данных" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="bash"><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">db:generate</span><span class="hl-1">    </span><span class="hl-6"># генерация миграций из схемы</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">db:push</span><span class="hl-1">        </span><span class="hl-6"># push схемы в БД</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">db:migrate</span><span class="hl-1">     </span><span class="hl-6"># выполнение миграций</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">db:studio</span><span class="hl-1">      </span><span class="hl-6"># визуальный интерфейс</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="проверки-и-качество-кода" class="tsd-anchor-link">Проверки и качество кода<a href="#проверки-и-качество-кода" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="bash"><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">lint</span><span class="hl-1">           </span><span class="hl-6"># проверка eslint</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">lint:fix</span><span class="hl-1">       </span><span class="hl-6"># автофиксы</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">format:check</span><span class="hl-1">   </span><span class="hl-6"># проверка форматирования</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">format:write</span><span class="hl-1">   </span><span class="hl-6"># автоформатирование</span><br/><span class="hl-0">pnpm</span><span class="hl-1"> </span><span class="hl-2">typecheck</span><span class="hl-1">      </span><span class="hl-6"># проверка типов</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="авторы" class="tsd-anchor-link">Авторы<a href="#авторы" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Имя: Данил Пустовалов
+GitHub: <a href="https://github.com/DanilPustovalov">https://github.com/DanilPustovalov</a></p>
+<p>Имя: Тимур Валитов
+GitHub: <a href="https://github.com/rokastxd">https://github.com/rokastxd</a></p>
+<p>Имя: Руслан Бормотов
+GitHub: <a href="https://github.com/RuslanBorman">https://github.com/RuslanBorman</a></p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#дневник-студента"><span>Дневник студента</span></a><ul><li><a href="#технологии"><span>Технологии</span></a></li><li><ul><li><a href="#язык-и-фреймворки"><span>Язык и фреймворки</span></a></li><li><a href="#база-данных"><span>База данных</span></a></li><li><a href="#аутентификация"><span>Аутентификация</span></a></li><li><a href="#telegram-webapp"><span>Telegram <wbr/>Web<wbr/>App</span></a></li><li><a href="#работа-с-данными"><span>Работа с данными</span></a></li><li><a href="#ui-и-стили"><span>UI и стили</span></a></li><li><a href="#качество-кода"><span>Качество кода</span></a></li></ul></li><li><a href="#возможности"><span>Возможности</span></a></li><li><a href="#структура-проекта"><span>Структура проекта</span></a></li><li><a href="#📦-установка"><span>📦 Установка</span></a></li><li><a href="#локальная-разработка"><span>Локальная разработка</span></a></li><li><a href="#работа-с-базой-данных"><span>Работа с базой данных</span></a></li><li><a href="#проверки-и-качество-кода"><span>Проверки и качество кода</span></a></li><li><a href="#авторы"><span>Авторы</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">homework-shedule - v0.1.0</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
