@@ -1,10 +1,7 @@
-import { eq } from 'drizzle-orm'
 import { z } from 'zod'
-import { createId } from '@paralleldrive/cuid2'
 
 import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc'
-import { groups, homework } from '~/server/db/schema'
-import { TRPCError } from '@trpc/server'
+import { HomeworkService } from '~/server/services/homework'
 
 export const homeworkRouter = createTRPCRouter({
     addHomework: protectedProcedure
@@ -16,61 +13,35 @@ export const homeworkRouter = createTRPCRouter({
             })
         )
         .mutation(async ({ ctx, input }) => {
-            if (!ctx.session?.user.groupId) {
-                throw new TRPCError({ code: 'UNAUTHORIZED' })
-            }
-
-            if (input.id) {
-                await ctx.db
-                    .update(homework)
-                    .set({
-                        discipline: input.discipline,
-                        body: input.body
-                    })
-                    .where(eq(homework.id, input.id))
-            } else {
-                await ctx.db.insert(homework).values({
-                    id: createId(),
-                    discipline: input.discipline,
-                    groupId: ctx.session.user.groupId,
-                    body: input.body,
-                    createdAt: new Date(),
-                    deadline: new Date()
-                })
-            }
+            const homework = new HomeworkService(
+                ctx.db,
+                ctx.session.user.id,
+                ctx.session.user.groupId
+            )
+            await homework.addHomework({
+                id: input.id,
+                discipline: input.discipline,
+                body: input.body
+            })
         }),
     getHomework: protectedProcedure.query(async ({ ctx }) => {
-        if (!ctx.session?.user.groupId) {
-            throw new TRPCError({ code: 'UNAUTHORIZED' })
-        }
-
-        const group = await ctx.db.query.groups.findFirst({
-            where: eq(groups.id, ctx.session.user.groupId)
-        })
-
-        if (!group) {
-            throw new TRPCError({
-                code: 'NOT_FOUND',
-                message: 'Failed to find group'
-            })
-        }
-
-        const myHomework = await ctx.db.query.homework.findMany({
-            where: eq(homework.groupId, ctx.session.user.groupId),
-            columns: {
-                id: true,
-                discipline: true,
-                body: true,
-                deadline: true,
-                createdAt: true
-            }
-        })
+        const homework = new HomeworkService(
+            ctx.db,
+            ctx.session.user.id,
+            ctx.session.user.groupId
+        )
+        const myHomework = await homework.getHomework()
 
         return myHomework
     }),
     removeHomework: protectedProcedure
         .input(z.object({ id: z.string() }))
         .mutation(async ({ ctx, input }) => {
-            await ctx.db.delete(homework).where(eq(homework.id, input.id))
+            const homework = new HomeworkService(
+                ctx.db,
+                ctx.session.user.id,
+                ctx.session.user.groupId
+            )
+            await homework.removeHomework(input.id)
         })
 })

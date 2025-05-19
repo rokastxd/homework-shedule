@@ -1,77 +1,67 @@
-import { TRPCError } from '@trpc/server'
-import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 
 import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc'
-import { groups, userTable } from '~/server/db/schema'
-import getTelegramUser from '~/server/logic/getTelegramUser'
+import { CurrentUser } from '~/server/services/current-user'
 
+/**
+ * Роутер, инкапсулирующий операции над пользователями.
+ * @module usersRouter
+ * @remarks
+ * Экспортируется как часть API-слоя tRPC.
+ */
 export const usersRouter = createTRPCRouter({
+    /**
+     * Привязывает текущего пользователя к группе.
+     *
+     * @remarks
+     * **Mutation**
+     *
+     * @param input.groupId - Идентификатор группы.
+     * @throws TRPCError – если пользователь не найден.
+     * @example
+     * ```ts
+     * await trpc.users.addGroup.mutate({ groupId: '42' })
+     * ```
+     */
     addGroup: protectedProcedure
         .input(z.object({ groupId: z.string().min(1) }))
         .mutation(async ({ ctx, input }) => {
-            await ctx.db
-                .update(userTable)
-                .set({
-                    groupId: input.groupId
-                })
-                .where(eq(userTable.id, ctx.session.user.id))
+            const user = new CurrentUser(ctx.db, ctx.session.user.id)
+            await user.addGroup(input.groupId)
         }),
 
+    /**
+     * Возвращает текущего пользователя.
+     *
+     * @remarks
+     * **Query**
+     *
+     * @returns Объект с полями `{ id, groupId }`.
+     * @throws TRPCError – если пользователь не найден.
+     */
     getUser: protectedProcedure.query(async ({ ctx }) => {
-        const user = await ctx.db.query.userTable.findFirst({
-            where: eq(userTable.id, ctx.session.user.id),
-            columns: { id: true, groupId: true }
-        })
+        const user = new CurrentUser(ctx.db, ctx.session.user.id)
+        const userData = await user.getUser()
 
-        if (!user) {
-            throw new TRPCError({
-                code: 'NOT_FOUND',
-                message: 'Failed to find user'
-            })
-        }
-
-        return user
+        return userData
     }),
 
+    /**
+     * Получает участников группы и их роли.
+     *
+     * @remarks
+     * **Query**
+     *
+     * @param input.groupId - Идентификатор группы.
+     * @returns Массив объектов `{ id, groupId, name, role }`.
+     * @throws TRPCError – если группа не найдена.
+     */
     getGroup: protectedProcedure
         .input(z.object({ groupId: z.string() }))
         .query(async ({ ctx, input }) => {
-            if (!input.groupId) return null
-
-            const groupUsers = await ctx.db.query.userTable.findMany({
-                where: eq(userTable.groupId, input.groupId),
-                columns: { id: true, groupId: true }
-            })
-
-            const group = await ctx.db.query.groups.findFirst({
-                where: eq(groups.id, input.groupId)
-            })
-
-            if (!groupUsers) {
-                throw new TRPCError({
-                    code: 'NOT_FOUND',
-                    message: 'Failed to find group'
-                })
-            }
-
-            const groupUsersWithName = await Promise.all(
-                groupUsers.map(async g => {
-                    const tgUser = await getTelegramUser(g.id)
-                    const role =
-                        group?.elderId === g.id ? 'Староста' : 'Участник'
-                    return {
-                        ...g,
-                        name: tgUser?.first_name ?? tgUser?.username,
-                        role: role
-                    }
-                })
-            )
+            const user = new CurrentUser(ctx.db, ctx.session.user.id)
+            const groupUsersWithName = await user.getGroup(input.groupId)
 
             return groupUsersWithName
-        }),
-
-    getSecretMessage: protectedProcedure.query(() => {
-        return 'you can now see this secret message!'
-    })
+        })
 })

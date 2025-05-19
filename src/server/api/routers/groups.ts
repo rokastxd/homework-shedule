@@ -1,39 +1,27 @@
-import { eq } from 'drizzle-orm'
 import { z } from 'zod'
-import { createId } from '@paralleldrive/cuid2'
 
 import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc'
-import { groups, userTable } from '~/server/db/schema'
+import { GroupsService } from '~/server/services/group'
 
 export const groupsRouter = createTRPCRouter({
     addGroup: protectedProcedure
         .input(z.object({ group_name: z.string().min(1) }))
         .mutation(async ({ ctx, input }) => {
-            const groupId = createId()
-
-            await ctx.db.insert(groups).values({
-                id: groupId,
-                nameGroup: input.group_name,
-                elderId: ctx.session.user.id
-            })
-
-            await ctx.db
-                .update(userTable)
-                .set({
-                    groupId: groupId
-                })
-                .where(eq(userTable.id, ctx.session.user.id))
+            const group = new GroupsService(
+                ctx.db,
+                ctx.session.user.id,
+                ctx.session.user.groupId
+            )
+            await group.addGroup(input.group_name)
         }),
     getGroup: protectedProcedure.query(async ({ ctx }) => {
-        if (!ctx.session?.user.groupId) {
-            throw new Error('Not authorized')
-        }
+        const group = new GroupsService(
+            ctx.db,
+            ctx.session.user.id,
+            ctx.session.user.groupId
+        )
+        const groupUsersWithName = await group.getGroup()
 
-        const group = await ctx.db.query.groups.findFirst({
-            where: eq(groups.id, ctx.session.user.groupId),
-            columns: { nameGroup: true }
-        })
-
-        return group?.nameGroup
+        return groupUsersWithName
     })
 })
