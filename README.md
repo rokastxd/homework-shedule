@@ -142,10 +142,10 @@ pnpm typecheck      # проверка типов
 ##  Авторы
 
 Имя: Данил Пустовалов
-GitHub: [@yourusername](https://github.com/rokastxd https://github.com/DanilPustovalov)
+GitHub: https://github.com/DanilPustovalov
 
 Имя: Тимур Валитов
-GitHub: [@yourusername](https://github.com/DanilPustovalov)
+GitHub: https://github.com/rokastxd 
 
 Имя: Руслан Бормотов
-GitHub: [@yourusername]()
+GitHub: https://github.com/RuslanBorman
